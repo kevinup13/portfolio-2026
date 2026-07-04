@@ -1,0 +1,239 @@
+/* --------------------------------------------------------------------------
+   1. TABLETS E TELAS MÉDIAS (Abaixo de 992px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 992px) {
+  /* Ajustes do Hero */
+  .hero {
+    height: auto; 
+    padding: 5rem 0;
+  }
+
+  .hero .container {
+    gap: 3rem; 
+  }
+
+  .hero .hero-content h1 {
+    font-size: 2.2rem; 
+  }
+
+  .hero .hero-image,
+  .hero .hero-image .neon-wrapper {
+    width: 320px;
+    height: 320px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. CELULARES GRANDES / DISPOSITIVOS EM MODO RETRATO (Abaixo de 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .hero .container {
+    flex-direction: column-reverse; 
+    text-align: center;
+    justify-content: center;
+  }
+
+  .hero .hero-content {
+    max-width: 100%;
+  }
+  
+  header .logo a, header .logo a span {
+    font-size: 1.3rem; 
+  }
+  
+  .about{
+    height: auto;
+    padding: 4rem 0;
+  }
+  
+  .about .container{
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .skills, .projects, .contact {
+    padding: 4rem 0;
+  }
+  
+  .skills .section-title,
+  .projects .section-title,
+  .contact .section-title {
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  /*SOLUÇÃO CONTRA ESMAGAMENTO DOS CARDS DE SKILL*/
+  .skills-grid .skill-card-wrapper {
+    width: 100%;
+    height: auto !important; /* Libera o contêiner rígido para expandir verticalmente */
+    min-height: 320px; 
+    display: block; 
+  }
+
+  .skills-grid .skill-card-wrapper .neon-shadow-back,
+  .skills-grid .skill-card-wrapper .area-image {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .skills-grid .skill-card-wrapper .neon-shadow-back {
+    position: absolute;
+    top: var(--neon-top);
+    left: var(--neon-left);
+    height: 100%;
+    z-index: 1;
+  }
+  
+  .skills-grid .skill-card-wrapper .area-image {
+    z-index: 2;
+  }
+
+  .skills-grid {
+    gap: 2rem;
+  }
+
+  .filter-menu {
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  .projects-grid {
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  
+  .contact-icons-row {
+    gap: 2rem;
+  }
+}
+/* --------------------------------------------------------------------------
+   3. CELULARES PADRÃO E TELAS PEQUENAS (Abaixo de 576px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 576px) {
+  .icon-menu {
+    display: flex; /* Exibe o botão no mobile */
+  }
+
+  /* Quando o menu estiver ativo, esconde o hambúrguer e exibe o X */
+  .icon-menu.active .svg-burger {
+    display: none;
+  }
+  .icon-menu.active .svg-close {
+    display: block;
+  }
+
+  /* Menu Responsivo Lateral Controlável por JS */
+  .nav-menu {
+    position: fixed;
+    top: 80px;
+    left: -100%; /* Começa escondido à esquerda */
+    width: 100%;
+    height: calc(100vh - 80px);
+    background-color: var(--bg-primary);
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 99;
+    padding-top: 2rem;
+  }
+
+  /* Alinha os links verticalmente no mobile */
+  .nav-menu ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .nav-menu ul li a {
+    font-size: 1.3rem;
+  }
+
+  /* CLASSE INJETADA PELO JAVASCRIPT: Quando ativa, o menu desliza para a tela */
+  .nav-menu.active {
+    left: 0;
+  }
+  
+  body {
+    font-size: 1rem; 
+  }
+
+  header .container {
+    height: auto;
+    gap: 1rem;
+    padding: 1rem 2rem; /* Mantém respiro nas bordas do celular */
+  }
+  
+  .hero {
+    padding: 3rem 0;
+  }
+ 
+  .hero .hero-content h1 {
+    font-size: 1.8rem;
+    line-height: 1.3;
+  }
+
+  .hero .hero-image,
+  .hero .hero-image .neon-wrapper {
+    width: 255px;
+    height: 255px;
+  }
+
+  .hero .hero-image .neon-shadow-back {
+    top: 10px;
+    left: 10px;
+  }
+  
+  .hero .hero-image .neon-wrapper:hover .neon-shadow-back {
+    transform: translate(2px, 2px);
+  }
+  
+  .hero .hero-image .neon-wrapper:hover .area-image {
+    transform: translate(-2px, -2px);
+  }
+  
+  .about .neon-wrapper {
+    --wrapper-w: 240px !important;
+    --wrapper-h: 320px !important;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr; 
+  }
+  
+  .skills-grid .category-card {
+    padding: 1.5rem;
+  }
+
+  .filter-menu {
+    flex-wrap: wrap; 
+    justify-content: center;
+  }
+
+  .contact-icons-row {
+    flex-wrap: wrap; 
+    gap: 1.5rem;
+  }
+
+  .icon-neon-anchor {
+    width: 60px;
+    height: 60px;
+  }
+
+  .contact-icon-svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}

@@ -1,0 +1,626 @@
+/* ====================== GOOGLE FONTS ===================== */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* ====================== RESET ===================== */
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+}
+
+/* ====================== VARIAVEIS ===================== */
+:root{
+  /* ---------- text color --------- */
+  --text-title: rgb(6, 242, 171);
+  --text-primary: #DAF1DE; 
+  --text-secondary: #051F20; 
+  --text-muted: #BEB69B;
+  --color-span: rgb(6, 242, 171);
+  --color-btn: rgb(6, 242, 171);
+  /* ---------- font family --------- */
+  --font-primary: 'Montserrat', sans-serif;
+  /* ---------- bg color ---------- */
+  --bg-primary: #051F20;
+  --bg-secondary: #163832;
+  /* ---------- box-shadow ---------- */
+  --box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ====================== BASE ===================== */
+body{
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  font-family: var(--font-primary);
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.container{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-btn);
+  color: var(--bg-primary);
+  font-weight: 600;
+  transition: 0.3s;
+}
+.btn:hover{
+  cursor: pointer;
+  scale: 1.1;
+  box-shadow: 
+    0 0 15px rgba(25, 78, 45, 0.6),
+    0 0 35px rgba(25, 78, 45, 0.4),
+    0 0 65px rgba(25, 78, 45, 0.2);
+}
+
+/* ====================== HEADER ===================== */
+header{
+  background-color: var(--bg-primary);
+  width: 100%;
+}
+.icon-menu {
+  display: none; /* Escondido no desktop */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+}
+
+/* O "X" começa sempre escondido */
+.icon-menu .svg-close {
+  display: none;
+}
+header .container{
+  display: flex;
+  height: 80px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo a{
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+header .logo a span{
+  color: var(--color-span);
+}
+header .nav-menu ul{
+  display: flex;
+  gap: 2rem;
+}
+header .nav-menu ul li a{
+  color: var(--text-primary);
+  transition: 0.3s;
+}
+header .nav-menu ul li a:hover{
+  color: var(--color-span);
+}
+
+/* ==========================================================================
+   COMPONENTE GLOBAL COMPONENTIZADO: EFEITO NEON REUTILIZÁVEL
+   ========================================================================== */
+.neon-wrapper {
+  /* Propriedades customizáveis padrões. Qualquer elemento pode redefinir estas variáveis */
+  --wrapper-w: 400px;
+  --wrapper-h: 400px;
+  --neon-top: 15px;
+  --neon-left: 15px;
+  --neon-hover-x: 5px;
+  --neon-hover-y: 5px;
+  --image-hover-x: -5px;
+  --image-hover-y: -5px;
+  --img-obj-position: center;
+
+  position: relative;
+  width: var(--wrapper-w);
+  height: var(--wrapper-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CAMADA DE TRÁS: O neon verde deslocado */
+.neon-wrapper .neon-shadow-back {
+  position: absolute;
+  top: var(--neon-top);
+  left: var(--neon-left);
+  width: 100%;
+  height: 100%;
+  border-radius: 5%;
+  background-color: transparent;
+  border: 2px solid var(--color-span);
+  z-index: 1;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  
+  box-shadow: 
+    0 0 15px rgba(25, 78, 45, 0.6),  
+    0 0 35px rgba(25, 78, 45, 0.4),  
+    0 0 65px rgba(25, 78, 45, 0.2);  
+}
+
+/* CAMADA DA FRENTE: Onde a imagem fica contida */
+.neon-wrapper .area-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5%;
+  border: 2px solid rgba(6, 242, 171, 0.3); /* Removido var(--color-hover) quebrada por fallback seguro */
+  background-color: var(--bg-secondary);    /* Corrigido var(--background-secondary) para var(--bg-secondary) */
+  overflow: hidden;
+  z-index: 2;
+  transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.neon-wrapper .area-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--img-obj-position);
+}
+
+/* COMPORTAMENTO DE INTERAÇÃO (HOVER) REUTILIZÁVEL */
+.neon-wrapper:hover .neon-shadow-back {
+  transform: translate(var(--neon-hover-x), var(--neon-hover-y));
+  box-shadow: 
+    0 0 20px rgba(25, 78, 45, 0.8),
+    0 0 45px rgba(25, 78, 45, 0.5),
+    0 0 85px rgba(25, 78, 45, 0.3);
+}
+
+.neon-wrapper:hover .area-image {
+  transform: translate(var(--image-hover-x), var(--image-hover-y));
+  border-color: #ffffff;
+}
+
+/* ========================= SEÇÃO HERO ========================= */
+.hero{
+  display: flex;
+  align-items: center;
+  height: calc(100vh - 80px);
+  background-color: var(--bg-primary);
+  padding: 4rem 0 3rem;
+}
+.hero .container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.hero .hero-content{
+  max-width: 600px;
+}
+.hero .hero-content h1{
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.hero .hero-content h1 span{
+  color: var(--color-span);
+}
+.hero .hero-content p{
+  font-size: 1.1rem;
+  margin: 1rem 0 1.5rem;
+}
+.hero .hero-image{
+  position: relative;
+  width: 400px;
+  height: 400px;
+}
+
+/* ========================= SEÇÃO ABOUT ========================= */
+.about {
+  height: auto;
+  min-height: 600px;
+  padding: 5rem 0;
+  background-color: var(--bg-primary);
+  display: flex;
+  align-items: center;
+}
+
+.about .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4rem;
+}
+
+.about .about-image {
+  order: 1;
+  flex-shrink: 0;
+}
+
+.about .neon-wrapper {
+  --wrapper-w: 300px;
+  --wrapper-h: 400px;
+  --neon-left: -15px;
+  --neon-hover-x: -5px;      /* Inverte a direção do hover atrás para combinar com o deslocamento */
+  --image-hover-x: 5px;      /* Inverte a direção do hover na frente */
+  --img-obj-position: center;
+  width: var(--wrapper-w);
+  height:var(--wrapper-h) ;
+
+}
+
+.about .about-content {
+  order: 2;
+  width: 100%;
+}
+
+.about .about-content h2 {
+  color: var(--text-title);
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.about .about-content p {
+  margin-bottom: 1.5rem;
+}
+
+/* ====================== SKILLS ===================== */
+.skills {
+  padding: 5rem 0;
+  background-color: var(--bg-primary);
+}
+
+.skills .section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--text-primary);
+  margin-bottom: 4rem;
+}
+
+.skills .section-title span {
+  color: var(--color-span);
+}
+
+/* Grid que organiza as 3 colunas de categorias */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 3.5rem;
+}
+
+/* Redefinimos o tamanho do wrapper para se comportar como um Card Flexível */
+.skills-grid .skill-card-wrapper {
+  --wrapper-w:  100%;       /* Ocupa a largura dinâmica da coluna do grid */
+  --wrapper-h: 320px;      /* Altura ideal para conter a lista de habilidades */
+  --neon-top: 12px;
+  --neon-left: 12px;
+}
+
+/* customização interna do componente para aceitar texto em vez de imagem */
+.skills-grid .category-card {
+  display: block;          /* Muda de flex para block para o texto fluir verticalmente */
+  padding: 2rem;
+  text-align: left;
+}
+
+.category-content h3 {
+  color: var(--text-primary);
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 1.8rem;
+  position: relative;
+}
+
+/* Pequena linha verde abaixo do título da categoria */
+.category-content h3::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background-color: var(--color-span);
+  border-radius: 2px;
+}
+
+/* Lista de Badges */
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.skill-badge {
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background-color: rgba(6, 242, 171, 0.05);
+  border: 1px solid rgba(6, 242, 171, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+  transition: 0.3s ease;
+}
+
+/* Efeito de destaque individual na habilidade ao passar o mouse */
+.skill-badge:hover {
+  background-color: var(--color-span);
+  color: var(--text-secondary);
+  box-shadow: 0 0 10px rgba(6, 242, 171, 0.4);
+  transform: translateY(-2px);
+}
+
+
+
+/* ====================== PROJECTS ===================== */
+.projects {
+  padding: 5rem 0;
+  background-color: var(--bg-primary);
+  min-height: 800px;
+}
+
+.projects .section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+}
+
+.projects .section-title span {
+  color: var(--color-span);
+}
+
+/* Ocultar os Radio Buttons nativos */
+input[name="filter-project"] {
+  display: none;
+}
+
+/* Menu de Filtros */
+.filter-menu {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.filter-btn {
+  padding: 0.6rem 1.5rem;
+  border: 2px solid var(--color-span);
+  border-radius: 0.5rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.filter-btn:hover {
+  background-color: rgba(6, 242, 171, 0.1);
+}
+
+/* Lógica do Filtro com CSS Puro:
+   Quando o input correspondente for marcado, ativa o botão e filtra o grid */
+#all:checked ~ .filter-menu .btn-all,
+#landing:checked ~ .filter-menu .btn-landing,
+#site:checked ~ .filter-menu .btn-site,
+#outros:checked ~ .filter-menu .btn-outros {
+  background-color: var(--color-span);
+  color: var(--bg-primary);
+  font-weight: 600;
+  box-shadow: 0 0 15px rgba(6, 242, 171, 0.4);
+}
+
+/* Grid de Exibição */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 3rem;
+}
+
+/* Card de Projeto Individual */
+
+.project-card {
+  background-color: var(--bg-secondary);
+  border-radius: 0.8rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: space-between; 
+}
+
+.project-card .neon-wrapper {
+  --wrapper-w: 100%;       /* Ocupa a largura total disponível no card */
+  --wrapper-h: 200px;      /* Altura reduzida para virar um banner do projeto */
+  --neon-top: 10px;        /* Sombra levemente menos deslocada devido ao tamanho */
+  --neon-left: 10px;
+}
+
+/* Elementos textuais do Card */
+.project-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  flex-grow: 1; /* Faz as infos preencherem o card, empurrando os links para baixo uniformemente */
+
+}
+
+.project-info h3 {
+  color: var(--text-primary);
+  font-size: 1.4rem;
+}
+
+.project-info p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.project-tech,
+.project-demo
+{
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-span);
+  background-color: rgba(6, 242, 171, 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.25rem;
+  border: 1px solid rgba(6, 242, 171, 0.2);
+}
+
+.project-demo {
+  margin-left: auto;
+  margin-top: auto;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.project-demo:hover {
+  background-color: var(--color-span);
+  color: var(--text-secondary);
+  box-shadow: 0 0 10px rgba(6, 242, 171, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   LÓGICA DOS FILTROS (Regras de exibição do Grid)
+   ========================================================================== */
+/* Esconde tudo por padrão quando um filtro específico é acionado */
+#landing:checked ~ .projects-grid .project-card:not(.target-landing),
+#site:checked ~ .projects-grid .project-card:not(.target-site),
+#outros:checked ~ .projects-grid .project-card:not(.target-outros) {
+  display: none;
+}
+
+/* ====================== CONTACT ===================== */
+.contact {
+  padding: 5rem 0;
+  background-color: var(--bg-primary);
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+}
+
+.contact .section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.contact .section-title span {
+  color: var(--color-span);
+}
+
+.contact-description {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 3rem auto;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+/* Alinhamento dos Ícones soltos */
+.contact-icons-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3.5rem; /* Espaçamento confortável entre os ícones */
+}
+
+/* O link que envolve o ícone */
+.icon-neon-anchor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* O SVG do ícone em si */
+.contact-icon-svg {
+  width: 42px;  /* Tamanho de destaque para o ícone */
+  height: 42px;
+  color: var(--text-primary); /* Cor neutra inicial */
+  transition: color 0.3s ease, filter 0.3s ease;
+}
+
+/* ==========================================================================
+   EFEITO DE INTERAÇÃO (HOVER) NOS ÍCONES
+   ========================================================================== */
+.icon-neon-anchor:hover {
+  transform: translateY(-8px); /* Elevação sutil em 3D */
+}
+
+.icon-neon-anchor:hover .contact-icon-svg {
+  color: var(--color-span); /* Muda para o verde brilhante */
+  
+  /* Cria o efeito puramente neon (Glow) projetado direto do desenho do ícone */
+  filter: drop-shadow(0 0 8px var(--color-span)) 
+          drop-shadow(0 0 20px rgba(6, 242, 171, 0.4));
+}
+
+/* ====================== FOOTER ===================== */
+.footer {
+  background-color: var(--bg-secondary); /* Um tom ligeiramente diferente para marcar o fim da página */
+  padding: 2rem 0;
+  border-top: 1px solid rgba(6, 242, 171, 0.1); /* Linha sutil verde neon para divisão */
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* Botão Voltar ao Topo */
+.back-to-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 0.5rem;
+  background-color: rgba(6, 242, 171, 0.05);
+  border: 1px solid rgba(6, 242, 171, 0.2);
+  color: var(--color-span);
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.back-to-top svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+/* Efeito de Hover alinhado com a identidade do portfólio */
+.back-to-top:hover {
+  background-color: var(--color-span);
+  color: var(--bg-primary);
+  box-shadow: 0 0 15px rgba(6, 242, 171, 0.4);
+}
+
+/* Pequena animação da seta subindo no hover */
+.back-to-top:hover svg {
+  transform: translateY(-2px);
+}
+
